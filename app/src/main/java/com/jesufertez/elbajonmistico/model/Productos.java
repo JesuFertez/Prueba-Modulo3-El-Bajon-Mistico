@@ -1,7 +1,5 @@
 package com.jesufertez.elbajonmistico.model;
 
-import android.widget.ImageView;
-
 public class Productos {
     String producto;
     String ingredientes;
