@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickInte
 
     private void initRecycler() {
         adapter = new ProductosAdapter((ArrayList<Productos>) ProductosData.productosList(), this);
-        binding.rvProductos.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.HORIZONTAL, false));
+        binding.rvProductos.setLayoutManager(new LinearLayoutManager(this));
         binding.rvProductos.setAdapter(adapter);
     }
 
