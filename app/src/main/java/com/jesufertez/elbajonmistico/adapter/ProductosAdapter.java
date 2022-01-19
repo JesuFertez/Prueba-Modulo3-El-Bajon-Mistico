@@ -1,5 +1,8 @@
 package com.jesufertez.elbajonmistico.adapter;
 
+import android.animation.Animator;
+import android.graphics.Color;
+import android.location.GnssAntennaInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.jesufertez.elbajonmistico.R;
 import com.jesufertez.elbajonmistico.databinding.ItemLayoutBinding;
 import com.jesufertez.elbajonmistico.casodeuso.RecyclerClickInterface;
@@ -19,11 +23,9 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
     private ArrayList<Productos> lista;
     private RecyclerClickInterface recyclerClickInterface;
 
-
     public ProductosAdapter(ArrayList<Productos> lista, RecyclerClickInterface recyclerClickInterface) {
         this.lista = lista;
         this.recyclerClickInterface = recyclerClickInterface;
-
     }
 
     @NonNull
@@ -46,14 +48,11 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
 
     public class ProductosViewHolder extends RecyclerView.ViewHolder {
         private ItemLayoutBinding binding;
-        int total,valor,subTotal;
+        LottieAnimationView animationView;
 
         public ProductosViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = ItemLayoutBinding.bind(itemView);
-            int total;
-            int valor;
-            int subTotal;
         }
 
         public void bindData(Productos productos) {
@@ -61,18 +60,32 @@ public class ProductosAdapter extends RecyclerView.Adapter<ProductosAdapter.Prod
             binding.tvPrecio.setText("$ " + String.valueOf(productos.getPrecio()));
             binding.tvIngredientes.setText(productos.getIngredientes());
             binding.ivProducto.setImageResource(productos.getImagen());
+            animationView = binding.animationView;
+
+            if (productos.isEstado()) {
+                animationView.setVisibility(View.VISIBLE);
+                animationView.playAnimation();
+            } else {
+                animationView.setVisibility(View.INVISIBLE);
+            }
 
             itemView.setOnClickListener(view -> {
-            recyclerClickInterface.onItemClick(getAdapterPosition(), productos.getPrecio(),productos.isEstado());
 
-            valor=productos.getPrecio();
-                if(itemView.isPressed()&&!productos.isEstado()){
+                recyclerClickInterface.onItemClick(getAdapterPosition(), productos.getPrecio(), productos.isEstado());
+
+                if (itemView.isPressed() && !productos.isEstado()) {
                     productos.setEstado(true);
+                    animationView.setVisibility(View.VISIBLE);
+                    animationView.playAnimation();
+
                     notifyItemChanged(getLayoutPosition());
-                }else if (itemView.isPressed()&& productos.isEstado()){
+                } else if (itemView.isPressed() && productos.isEstado()) {
                     productos.setEstado(false);
+                    animationView.setVisibility(View.INVISIBLE);
                 }
+
             });
+
         }
     }
 }

@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.jesufertez.elbajonmistico.R;
 import com.jesufertez.elbajonmistico.adapter.ProductosAdapter;
 import com.jesufertez.elbajonmistico.databinding.ActivityMainBinding;
 import com.jesufertez.elbajonmistico.casodeuso.RecyclerClickInterface;
@@ -63,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickInte
         binding.rvProductos.setAdapter(adapter);
     }
 
-
     @Override
     public void onItemClick(int position, int valor, boolean estado) {
 
@@ -88,5 +89,4 @@ public class MainActivity extends AppCompatActivity implements RecyclerClickInte
             binding.tvTotalMonto.setText(String.valueOf(total));
         }
     }
-
 }

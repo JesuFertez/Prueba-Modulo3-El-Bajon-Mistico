@@ -8,7 +8,6 @@ public class Repository {
     public Repository(Context context) {
     }
 
-
     public int opera(int subtotal) {
         int totalDescuento;
 

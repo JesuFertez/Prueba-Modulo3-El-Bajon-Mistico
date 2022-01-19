@@ -5,7 +5,6 @@ import com.jesufertez.elbajonmistico.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ProductosData {
     public static List<Productos> productosList() {
         List<Productos> productosList = new ArrayList<>();
